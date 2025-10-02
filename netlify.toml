@@ -1,15 +1,22 @@
 [build]
-  functions = "api"
-  publish = "."
+command = “npm install”
+functions = “api”
+publish = “.”
 
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
-  status = 200
+from = “/api/*”
+to = “/.netlify/functions/:splat”
+status = 200
 
 [[headers]]
-  for = "/api/*"
-  [headers.values]
-    Access-Control-Allow-Origin = "*"
-    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
-    Access-Control-Allow-Headers = "Content-Type, Authorization"
+for = “/api/*”
+[headers.values]
+Access-Control-Allow-Origin = “*”
+Access-Control-Allow-Methods = “GET, POST, PUT, DELETE, OPTIONS”
+Access-Control-Allow-Headers = “Content-Type, Authorization”
+
+[[headers]]
+for = “/*”
+[headers.values]
+X-Frame-Options = “DENY”
+X-Content-Type-Options = “nosniff”
