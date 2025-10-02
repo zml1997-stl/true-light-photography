@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - True Light Photography</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    :root {
+        --primary: #C9A86A;
+        --dark: #4A4A4A;
+        --light: #F9F7F4;
+        --white: #FFFFFF;
+        --border: #E8E6E3;
+        --danger: #dc3545;
+        --success: #28a745;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: var(--light);
+        color: var(--dark);
+    }
+
+    .admin-container {
+        display: flex;
+        min-height: 100vh;
+    }
+
+    .sidebar {
+        width: 250px;
+        background-color: var(--dark);
+        color: var(--white);
+        padding: 2rem 0;
+        position: fixed;
+        height: 100vh;
+        overflow-y: auto;
+    }
+
+    .sidebar h2 {
+        padding: 0 2rem;
+        margin-bottom: 2rem;
+        color: var(--primary);
+        font-size: 1.5rem;
+    }
+
+    .sidebar nav a {
+        display: block;
+        padding: 1rem 2rem;
+        color: var(--white);
+        text-decoration: none;
+        transition: background 0.3s;
+    }
+
+    .sidebar nav a:hover,
+    .sidebar nav a.active {
+        background-color: rgba(201, 168, 106, 0.2);
+        border-left: 4px solid var(--primary);
+    }
+
+    .main-content {
+        margin-left: 250px;
+        flex: 1;
+        padding: 2rem;
+    }
+
+    .header {
+        background-color: var(--white);
+        padding: 1.5rem 2rem;
+        margin: -2rem -2rem 2rem;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .section {
+        display: none;
+    }
+
+    .section.active {
+        display: block;
+    }
+
+    .card {
+        background-color: var(--white);
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .card h2 {
+        margin-bottom: 1.5rem;
+        color: var(--primary);
+    }
+
+    .btn {
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: var(--primary);
+        color: var(--white);
+    }
+
+    .btn-primary:hover {
+        opacity: 0.9;
+    }
+
+    .btn-danger {
+        background-color: var(--danger);
+        color: var(--white);
+    }
+
+    .btn-success {
+        background-color: var(--success);
+        color: var(--white);
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 0.75rem;
+        border: 2px solid var(--border);
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 1rem;
+    }
+
+    .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+    }
+
+    table th,
+    table td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid var(--border);
+    }
+
+    table th {
+        background-color: var(--light);
+        font-weight: 600;
+    }
+
+    table tr:hover {
+        background-color: var(--light);
+    }
+
+    .action-buttons {
+        display: flex;
+        gap: 0.5rem;
+    }
+
+    .action-buttons button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .modal-content {
+        background-color: var(--white);
+        padding: 2rem;
+        border-radius: 8px;
+        max-width: 600px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+    .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .close-modal {
+        font-size: 1.5rem;
+        cursor: pointer;
+        background: none;
+        border: none;
+        color: var(--dark);
+    }
+
+    .alert {
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border-radius: 4px;
+        display: none;
+    }
+
+    .alert.show {
+        display: block;
+    }
+
+    .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+
+    .feature-list {
+        margin-bottom: 1rem;
+    }
+
+    .feature-item {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .feature-item input {
+        flex: 1;
+    }
+
+    .feature-item button {
+        padding: 0.5rem 1rem;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .stat-card {
+        background: linear-gradient(135deg, var(--primary), #d4b896);
+        color: var(--white);
+        padding: 1.5rem;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .stat-card h3 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .stat-card p {
+        opacity: 0.9;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="admin-container">
+        <aside class="sidebar">
+            <h2>Admin Panel</h2>
+            <nav>
+                <a href="#dashboard" class="nav-link active" data-section="dashboard">Dashboard</a>
+                <a href="#portfolio" class="nav-link" data-section="portfolio">Portfolio</a>
+                <a href="#services" class="nav-link" data-section="services">Services</a>
+                <a href="#blog" class="nav-link" data-section="blog">Blog</a>
+                <a href="#testimonials" class="nav-link" data-section="testimonials">Testimonials</a>
+            </nav>
+        </aside>
+
+```
+    <main class="main-content">
+        <div class="header">
+            <h1>True Light Photography Admin</h1>
+            <a href="/" class="btn btn-primary">View Site</a>
+        </div>
+
+        <div id="alert" class="alert"></div>
+
+        <!-- Dashboard Section -->
+        <section id="dashboard" class="section active">
+            <div class="card">
+                <h2>Dashboard</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3 id="portfolioCount">0</h3>
+                        <p>Portfolio Items</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="servicesCount">0</h3>
+                        <p>Services</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="blogCount">0</h3>
+                        <p>Blog Posts</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3 id="testimonialsCount">0</h3>
+                        <p>Testimonials</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="section">
+            <div class="card">
+                <h2>Portfolio Management</h2>
+                <button class="btn btn-primary" onclick="openPortfolioModal()">Add New Item</button>
+                <table id="portfolioTable">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Title</th>
+                            <th>Featured</th>
+                            <th>Order</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="section">
+            <div class="card">
+                <h2>Services Management</h2>
+                <button class="btn btn-primary" onclick="openServiceModal()">Add New Service</button>
+                <table id="servicesTable">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Price Range</th>
+                            <th>Active</th>
+                            <th>Order</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section">
+            <div class="card">
+                <h2>Blog Management</h2>
+                <button class="btn btn-primary" onclick="openBlogModal()">Add New Post</button>
+                <table id="blogTable">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Published Date</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="section">
+            <div class="card">
+                <h2>Testimonials Management</h2>
+                <button class="btn btn-primary" onclick="openTestimonialModal()">Add New Testimonial</button>
+                <table id="testimonialsTable">
+                    <thead>
+                        <tr>
+                            <th>Author</th>
+                            <th>Rating</th>
+                            <th>Active</th>
+                            <th>Order</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+</div>
+
+<!-- Portfolio Modal -->
+<div id="portfolioModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="portfolioModalTitle">Add Portfolio Item</h2>
+            <button class="close-modal" onclick="closeModal('portfolioModal')">&times;</button>
+        </div>
+        <form id="portfolioForm">
+            <input type="hidden" id="portfolio_id">
+            <div class="form-group">
+                <label for="portfolio_category">Category *</label>
+                <select id="portfolio_category" required>
+                    <option value="">Select category</option>
+                    <option value="Portraits">Portraits</option>
+                    <option value="Couples & Engagements">Couples & Engagements</option>
+                    <option value="Family">Family</option>
+                    <option value="Branding & Events">Branding & Events</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="portfolio_image_url">Image URL *</label>
+                <input type="url" id="portfolio_image_url" required>
+            </div>
+            <div class="form-group">
+                <label for="portfolio_title">Title</label>
+                <input type="text" id="portfolio_title">
+            </div>
+            <div class="form-group">
+                <label for="portfolio_description">Description</label>
+                <textarea id="portfolio_description"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="portfolio_order">Display Order</label>
+                    <input type="number" id="portfolio_order" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="portfolio_featured">
+                        <input type="checkbox" id="portfolio_featured"> Featured on homepage
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Service Modal -->
+<div id="serviceModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="serviceModalTitle">Add Service</h2>
+            <button class="close-modal" onclick="closeModal('serviceModal')">&times;</button>
+        </div>
+        <form id="serviceForm">
+            <input type="hidden" id="service_id">
+            <div class="form-group">
+                <label for="service_name">Service Name *</label>
+                <input type="text" id="service_name" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="service_price_min">Min Price ($) *</label>
+                    <input type="number" id="service_price_min" required>
+                </div>
+                <div class="form-group">
+                    <label for="service_price_max">Max Price ($)</label>
+                    <input type="number" id="service_price_max">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="service_description">Description</label>
+                <textarea id="service_description"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Features</label>
+                <div id="featuresList" class="feature-list"></div>
+                <button type="button" class="btn btn-primary" onclick="addFeature()">Add Feature</button>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="service_order">Display Order</label>
+                    <input type="number" id="service_order" value="0">
+                </div>
+                <div class="form-group">
+                    <label for="service_active">
+                        <input type="checkbox" id="service_active" checked> Active
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Blog Modal -->
+<div id="blogModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="blogModalTitle">Add Blog Post</h2>
+            <button class="close-modal" onclick="closeModal('blogModal')">&times;</button>
+        </div>
+        <form id="blogForm">
+            <input type="hidden" id="blog_id">
+            <div class="form-group">
+                <label for="blog_title">Title *</label>
+                <input type="text" id="blog_title" required>
+            </div>
+            <div class="form-group">
+                <label for="blog_slug">URL Slug *</label>
+                <input type="text" id="blog_slug" required>
+            </div>
+            <div class="form-group">
+                <label for="blog_image_url">Featured Image URL *</label>
+                <input type="url" id="blog_image_url" required>
+            </div>
+            <div class="form-group">
+                <label for="blog_excerpt">Excerpt *</label>
+                <textarea id="blog_excerpt" required style="min-height: 80px;"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="blog_content">Content</label>
+                <textarea id="blog_content" style="min-height: 200px;"></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="blog_date">Published Date *</label>
+                    <input type="date" id="blog_date" required>
+                </div>
+                <div class="form-group">
+                    <label for="blog_published">
+                        <input type="checkbox" id="blog_published"> Published
+                    </label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+
+<!-- Testimonial Modal -->
+<div id="testimonialModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="testimonialModalTitle">Add Testimonial</h2>
+            <button class="close-modal" onclick="closeModal('testimonialModal')">&times;</button>
+        </div>
+        <form id="testimonialForm">
+            <input type="hidden" id="testimonial_id">
+            <div class="form-group">
+                <label for="testimonial_author">Author Name *</label>
+                <input type="text" id="testimonial_author" required>
+            </div>
+            <div class="form-group">
+                <label for="testimonial_text">Testimonial *</label>
+                <textarea id="testimonial_text" required></textarea>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="testimonial_rating">Rating *</label>
+                    <select id="testimonial_rating" required>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="testimonial_order">Display Order</label>
+                    <input type="number" id="testimonial_order" value="0">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="testimonial_active">
+                    <input type="checkbox" id="testimonial_active" checked> Active
+                </label>
+            </div>
+            <button type="submit" class="btn btn-success">Save</button>
+        </form>
+    </div>
+</div>
+
+<script>
+    const API_BASE = '/.netlify/functions';
+    let currentData = {};
+
+    // Navigation
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const section = link.dataset.section;
+            
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+            link.classList.add('active');
+            
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(section).classList.add('active');
+            
+            loadSectionData(section);
+        });
+    });
+
+    // Show alert
+    function showAlert(message, type = 'success') {
+        const alert = document.getElementById('alert');
+        alert.textContent = message;
+        alert.className = `alert alert-${type} show`;
+        setTimeout(() => alert.classList.remove('show'), 5000);
+    }
+
+    // Modal functions
+    function closeModal(modalId) {
+        document.getElementById(modalId).classList.remove('active');
+    }
+
+    // Load section data
+    async function loadSectionData(section) {
+        switch(section) {
+            case 'dashboard':
+                loadDashboard();
+                break;
+            case 'portfolio':
+                loadPortfolio();
+                break;
+            case 'services':
+                loadServices();
+                break;
+            case 'blog':
+                loadBlog();
+                break;
+            case 'testimonials':
+                loadTestimonials();
+                break;
+        }
+    }
+
+    // Dashboard
+    async function loadDashboard() {
+        try {
+            const [portfolio, services, blog, testimonials] = await Promise.all([
+                fetch(`${API_BASE}/portfolio`).then(r => r.json()),
+                fetch(`${API_BASE}/services`).then(r => r.json()),
+                fetch(`${API_BASE}/blog`).then(r => r.json()),
+                fetch(`${API_BASE}/testimonials`).then(r => r.json())
+            ]);
+            
+            document.getElementById('portfolioCount').textContent = portfolio.length;
+            document.getElementById('servicesCount').textContent = services.length;
+            document.getElementById('blogCount').textContent = blog.length;
+            document.getElementById('testimonialsCount').textContent = testimonials.length;
+        } catch (error) {
+            console.error('Dashboard load error:', error);
+        }
+    }
+
+    // Portfolio Management
+    async function loadPortfolio() {
+        try {
+            const response = await fetch(`${API_BASE}/portfolio`);
+            const items = await response.json();
+            currentData.portfolio = items;
+            
+            const tbody = document.querySelector('#portfolioTable tbody');
+            tbody.innerHTML = items.map(item => `
+                <tr>
+                    <td>${item.category}</td>
+                    <td>${item.title || '-'}</td>
+                    <td>${item.is_featured ? 'Yes' : 'No'}</td>
+                    <td>${item.display_order}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-primary" onclick="editPortfolio(${item.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="deletePortfolio(${item.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            showAlert('Error loading portfolio', 'error');
+        }
+    }
+
+    function openPortfolioModal(id = null) {
+        const modal = document.getElementById('portfolioModal');
+        const form = document.getElementById('portfolioForm');
+        form.reset();
+        
+        if (id) {
+            const item = currentData.portfolio.find(p => p.id === id);
+            document.getElementById('portfolioModalTitle').textContent = 'Edit Portfolio Item';
+            document.getElementById('portfolio_id').value = item.id;
+            document.getElementById('portfolio_category').value = item.category;
+            document.getElementById('portfolio_image_url').value = item.image_url;
+            document.getElementById('portfolio_title').value = item.title || '';
+            document.getElementById('portfolio_description').value = item.description || '';
+            document.getElementById('portfolio_order').value = item.display_order;
+            document.getElementById('portfolio_featured').checked = item.is_featured;
+        } else {
+            document.getElementById('portfolioModalTitle').textContent = 'Add Portfolio Item';
+            document.getElementById('portfolio_id').value = '';
+        }
+        
+        modal.classList.add('active');
+    }
+
+    function editPortfolio(id) {
+        openPortfolioModal(id);
+    }
+
+    async function deletePortfolio(id) {
+        if (!confirm('Are you sure you want to delete this item?')) return;
+        
+        try {
+            await fetch(`${API_BASE}/portfolio`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+            showAlert('Portfolio item deleted');
+            loadPortfolio();
+        } catch (error) {
+            showAlert('Error deleting item', 'error');
+        }
+    }
+
+    document.getElementById('portfolioForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const id = document.getElementById('portfolio_id').value;
+        const data = {
+            category: document.getElementById('portfolio_category').value,
+            image_url: document.getElementById('portfolio_image_url').value,
+            title: document.getElementById('portfolio_title').value,
+            description: document.getElementById('portfolio_description').value,
+            display_order: parseInt(document.getElementById('portfolio_order').value),
+            is_featured: document.getElementById('portfolio_featured').checked
+        };
+        
+        try {
+            const method = id ? 'PUT' : 'POST';
+            if (id) data.id = parseInt(id);
+            
+            await fetch(`${API_BASE}/portfolio`, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            showAlert(`Portfolio item ${id ? 'updated' : 'created'}`);
+            closeModal('portfolioModal');
+            loadPortfolio();
+        } catch (error) {
+            showAlert('Error saving portfolio item', 'error');
+        }
+    });
+
+    // Services Management
+    async function loadServices() {
+        try {
+            const response = await fetch(`${API_BASE}/services`);
+            const items = await response.json();
+            currentData.services = items;
+            
+            const tbody = document.querySelector('#servicesTable tbody');
+            tbody.innerHTML = items.map(item => `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>$${item.price_min}${item.price_max ? ' - $' + item.price_max : ''}</td>
+                    <td>${item.is_active ? 'Yes' : 'No'}</td>
+                    <td>${item.display_order}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-primary" onclick="editService(${item.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteService(${item.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            showAlert('Error loading services', 'error');
+        }
+    }
+
+    function openServiceModal(id = null) {
+        const modal = document.getElementById('serviceModal');
+        const form = document.getElementById('serviceForm');
+        form.reset();
+        document.getElementById('featuresList').innerHTML = '';
+        
+        if (id) {
+            const item = currentData.services.find(s => s.id === id);
+            document.getElementById('serviceModalTitle').textContent = 'Edit Service';
+            document.getElementById('service_id').value = item.id;
+            document.getElementById('service_name').value = item.name;
+            document.getElementById('service_price_min').value = item.price_min;
+            document.getElementById('service_price_max').value = item.price_max || '';
+            document.getElementById('service_description').value = item.description || '';
+            document.getElementById('service_order').value = item.display_order;
+            document.getElementById('service_active').checked = item.is_active;
+            
+            const features = Array.isArray(item.features) ? item.features : JSON.parse(item.features || '[]');
+            features.forEach(feature => addFeature(feature));
+        } else {
+            document.getElementById('serviceModalTitle').textContent = 'Add Service';
+            addFeature();
+        }
+        
+        modal.classList.add('active');
+    }
+
+    function addFeature(value = '') {
+        const container = document.getElementById('featuresList');
+        const div = document.createElement('div');
+        div.className = 'feature-item';
+        div.innerHTML = `
+            <input type="text" class="feature-input" value="${value}" placeholder="Enter feature">
+            <button type="button" class="btn btn-danger" onclick="this.parentElement.remove()">Remove</button>
+        `;
+        container.appendChild(div);
+    }
+
+    function editService(id) {
+        openServiceModal(id);
+    }
+
+    async function deleteService(id) {
+        if (!confirm('Are you sure?')) return;
+        
+        try {
+            await fetch(`${API_BASE}/services`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+            showAlert('Service deleted');
+            loadServices();
+        } catch (error) {
+            showAlert('Error deleting service', 'error');
+        }
+    }
+
+    document.getElementById('serviceForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const features = Array.from(document.querySelectorAll('.feature-input'))
+            .map(input => input.value)
+            .filter(v => v.trim());
+        
+        const id = document.getElementById('service_id').value;
+        const data = {
+            name: document.getElementById('service_name').value,
+            price_min: parseFloat(document.getElementById('service_price_min').value),
+            price_max: parseFloat(document.getElementById('service_price_max').value) || null,
+            description: document.getElementById('service_description').value,
+            features: features,
+            display_order: parseInt(document.getElementById('service_order').value),
+            is_active: document.getElementById('service_active').checked
+        };
+        
+        try {
+            const method = id ? 'PUT' : 'POST';
+            if (id) data.id = parseInt(id);
+            
+            await fetch(`${API_BASE}/services`, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            showAlert(`Service ${id ? 'updated' : 'created'}`);
+            closeModal('serviceModal');
+            loadServices();
+        } catch (error) {
+            showAlert('Error saving service', 'error');
+        }
+    });
+
+    // Blog Management
+    async function loadBlog() {
+        try {
+            const response = await fetch(`${API_BASE}/blog`);
+            const items = await response.json();
+            currentData.blog = items;
+            
+            const tbody = document.querySelector('#blogTable tbody');
+            tbody.innerHTML = items.map(item => `
+                <tr>
+                    <td>${item.title}</td>
+                    <td>${new Date(item.published_date).toLocaleDateString()}</td>
+                    <td>${item.is_published ? 'Published' : 'Draft'}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-primary" onclick="editBlog(${item.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteBlog(${item.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            showAlert('Error loading blog', 'error');
+        }
+    }
+
+    function openBlogModal(id = null) {
+        const modal = document.getElementById('blogModal');
+        const form = document.getElementById('blogForm');
+        form.reset();
+        
+        if (id) {
+            const item = currentData.blog.find(b => b.id === id);
+            document.getElementById('blogModalTitle').textContent = 'Edit Blog Post';
+            document.getElementById('blog_id').value = item.id;
+            document.getElementById('blog_title').value = item.title;
+            document.getElementById('blog_slug').value = item.slug;
+            document.getElementById('blog_image_url').value = item.image_url;
+            document.getElementById('blog_excerpt').value = item.excerpt;
+            document.getElementById('blog_content').value = item.content || '';
+            document.getElementById('blog_date').value = item.published_date;
+            document.getElementById('blog_published').checked = item.is_published;
+        } else {
+            document.getElementById('blogModalTitle').textContent = 'Add Blog Post';
+            document.getElementById('blog_date').value = new Date().toISOString().split('T')[0];
+        }
+        
+        modal.classList.add('active');
+    }
+
+    function editBlog(id) {
+        openBlogModal(id);
+    }
+
+    async function deleteBlog(id) {
+        if (!confirm('Are you sure?')) return;
+        
+        try {
+            await fetch(`${API_BASE}/blog`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+            showAlert('Blog post deleted');
+            loadBlog();
+        } catch (error) {
+            showAlert('Error deleting post', 'error');
+        }
+    }
+
+    document.getElementById('blogForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const id = document.getElementById('blog_id').value;
+        const data = {
+            title: document.getElementById('blog_title').value,
+            slug: document.getElementById('blog_slug').value,
+            image_url: document.getElementById('blog_image_url').value,
+            excerpt: document.getElementById('blog_excerpt').value,
+            content: document.getElementById('blog_content').value,
+            published_date: document.getElementById('blog_date').value,
+            is_published: document.getElementById('blog_published').checked
+        };
+        
+        try {
+            const method = id ? 'PUT' : 'POST';
+            if (id) data.id = parseInt(id);
+            
+            await fetch(`${API_BASE}/blog`, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            showAlert(`Blog post ${id ? 'updated' : 'created'}`);
+            closeModal('blogModal');
+            loadBlog();
+        } catch (error) {
+            showAlert('Error saving post', 'error');
+        }
+    });
+
+    // Testimonials Management
+    async function loadTestimonials() {
+        try {
+            const response = await fetch(`${API_BASE}/testimonials`);
+            const items = await response.json();
+            currentData.testimonials = items;
+            
+            const tbody = document.querySelector('#testimonialsTable tbody');
+            tbody.innerHTML = items.map(item => `
+                <tr>
+                    <td>${item.author_name}</td>
+                    <td>${'★'.repeat(item.rating)}</td>
+                    <td>${item.is_active ? 'Yes' : 'No'}</td>
+                    <td>${item.display_order}</td>
+                    <td class="action-buttons">
+                        <button class="btn btn-primary" onclick="editTestimonial(${item.id})">Edit</button>
+                        <button class="btn btn-danger" onclick="deleteTestimonial(${item.id})">Delete</button>
+                    </td>
+                </tr>
+            `).join('');
+        } catch (error) {
+            showAlert('Error loading testimonials', 'error');
+        }
+    }
+
+    function openTestimonialModal(id = null) {
+        const modal = document.getElementById('testimonialModal');
+        const form = document.getElementById('testimonialForm');
+        form.reset();
+        
+        if (id) {
+            const item = currentData.testimonials.find(t => t.id === id);
+            document.getElementById('testimonialModalTitle').textContent = 'Edit Testimonial';
+            document.getElementById('testimonial_id').value = item.id;
+            document.getElementById('testimonial_author').value = item.author_name;
+            document.getElementById('testimonial_text').value = item.testimonial_text;
+            document.getElementById('testimonial_rating').value = item.rating;
+            document.getElementById('testimonial_order').value = item.display_order;
+            document.getElementById('testimonial_active').checked = item.is_active;
+        } else {
+            document.getElementById('testimonialModalTitle').textContent = 'Add Testimonial';
+        }
+        
+        modal.classList.add('active');
+    }
+
+    function editTestimonial(id) {
+        openTestimonialModal(id);
+    }
+
+    async function deleteTestimonial(id) {
+        if (!confirm('Are you sure?')) return;
+        
+        try {
+            await fetch(`${API_BASE}/testimonials`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ id })
+            });
+            showAlert('Testimonial deleted');
+            loadTestimonials();
+        } catch (error) {
+            showAlert('Error deleting testimonial', 'error');
+        }
+    }
+
+    document.getElementById('testimonialForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        
+        const id = document.getElementById('testimonial_id').value;
+        const data = {
+            author_name: document.getElementById('testimonial_author').value,
+            testimonial_text: document.getElementById('testimonial_text').value,
+            rating: parseInt(document.getElementById('testimonial_rating').value),
+            display_order: parseInt(document.getElementById('testimonial_order').value),
+            is_active: document.getElementById('testimonial_active').checked
+        };
+        
+        try {
+            const method = id ? 'PUT' : 'POST';
+            if (id) data.id = parseInt(id);
+            
+            await fetch(`${API_BASE}/testimonials`, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            });
+            
+            showAlert(`Testimonial ${id ? 'updated' : 'created'}`);
+            closeModal('testimonialModal');
+            loadTestimonials();
+        } catch (error) {
+            showAlert('Error saving testimonial', 'error');
+        }
+    });
+
+    // Auto-generate slug from title for blog
+    document.getElementById('blog_title').addEventListener('input', (e) => {
+        if (!document.getElementById('blog_id').value) {
+            const slug = e.target.value.toLowerCase()
+                .replace(/[^a-z0-9]+/g, '-')
+                .replace(/^-|-$/g, '');
+            document.getElementById('blog_slug').value = slug;
+        }
+    });
+
+    // Load dashboard on page load
+    loadDashboard();
+</script>
+</body>
+</html>
