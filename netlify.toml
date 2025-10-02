@@ -1,21 +1,15 @@
 [build]
-  # For static sites, we don't need a build command
-  # but Netlify requires one to be set
-  command = "echo 'Static site - no build needed'"
-  
-  # The publish directory is the root since Index.html is in the root
+  functions = "api"
   publish = "."
 
-[build.environment]
-  # No special environment variables needed for static site
-
-# Handle case-sensitive routing issues
 [[redirects]]
-  from = "/index.html"
-  to = "/Index.html"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
 
-[[redirects]]
-  from = "/*"
-  to = "/Index.html"
-  status = 200
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, PUT, DELETE, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, Authorization"
