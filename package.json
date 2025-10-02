@@ -1,13 +1,13 @@
 {
-  "name": "true-light-photography",
+  "name": "truelight-photography",
   "version": "1.0.0",
-  "description": "True Light Photography - Portfolio website",
-  "main": "Index.html",
+  "description": "Photography portfolio with admin system",
   "scripts": {
-    "build": "echo 'No build process needed for static site'",
-    "start": "echo 'This is a static HTML site. Open Index.html in a browser.'"
+    "dev": "netlify dev",
+    "build": "echo 'Build complete'"
   },
-  "keywords": ["photography", "portfolio", "static", "website"],
-  "author": "True Light Photography",
-  "license": "ISC"
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.0",
+    "bcryptjs": "^2.4.3"
+  }
 }
