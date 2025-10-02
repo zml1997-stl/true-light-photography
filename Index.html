@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>True Light Photography | Portrait Photographer | Engagement & Branding Photography</title>
+    <meta name="description" content="True Light Photography - Boutique portrait photographer specializing in storytelling through light. Engagements, couples, family, and branding photography with luxury editing. Book your session today.">
+    <meta name="keywords" content="portrait photographer, engagement photography, family photographer, branding photography, boutique photographer, luxury photography">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    :root {
+        --cream: #F9F7F4;
+        --light-gray: #E8E6E3;
+        --charcoal: #6B6B6B;
+        --dark-charcoal: #4A4A4A;
+        --gold: #C9A86A;
+        --blush: #D4B5A8;
+        --white: #FFFFFF;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--dark-charcoal);
+        line-height: 1.6;
+        background-color: var(--cream);
+        overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+        font-family: Georgia, 'Times New Roman', serif;
+        font-weight: 400;
+        letter-spacing: 1px;
+        color: var(--charcoal);
+    }
+
+    /* Navigation */
+    nav {
+        position: fixed;
+        width: 100%;
+        background-color: rgba(249, 247, 244, 0.97);
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        z-index: 1000;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: padding 0.3s;
+    }
+
+    nav.scrolled {
+        padding: 0.5rem 5%;
+    }
+
+    .nav-brand {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-decoration: none;
+    }
+
+    .nav-logo-img {
+        width: 50px;
+        height: 50px;
+        transition: transform 0.3s;
+    }
+
+    .nav-logo-img:hover {
+        transform: scale(1.05);
+    }
+
+    .nav-logo-text {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: var(--charcoal);
+        letter-spacing: 2px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: var(--dark-charcoal);
+        font-size: 0.95rem;
+        letter-spacing: 0.5px;
+        transition: color 0.3s;
+        position: relative;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--gold);
+        transition: width 0.3s;
+    }
+
+    .nav-links a:hover::after {
+        width: 100%;
+    }
+
+    .nav-links a:hover {
+        color: var(--gold);
+    }
+
+    .mobile-menu {
+        display: none;
+        flex-direction: column;
+        gap: 5px;
+        cursor: pointer;
+    }
+
+    .mobile-menu span {
+        width: 25px;
+        height: 2px;
+        background-color: var(--charcoal);
+        transition: 0.3s;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: 100vh;
+        background: linear-gradient(rgba(74, 74, 74, 0.4), rgba(74, 74, 74, 0.4)),
+                    url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%23E8E6E3;stop-opacity:1" /><stop offset="100%" style="stop-color:%23D4B5A8;stop-opacity:0.8" /></linearGradient></defs><rect fill="url(%23grad1)" width="1200" height="800"/><circle cx="300" cy="200" r="150" fill="%23F9F7F4" opacity="0.1"/><circle cx="900" cy="600" r="200" fill="%23C9A86A" opacity="0.08"/></svg>');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        color: var(--white);
+        position: relative;
+    }
+
+    .hero-content {
+        z-index: 2;
+    }
+
+    .hero-logo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 2rem;
+        opacity: 0;
+        animation: fadeIn 1s ease-in forwards;
+        filter: brightness(0) invert(1);
+    }
+
+    .hero h1 {
+        font-size: 5rem;
+        margin-bottom: 1rem;
+        color: var(--white);
+        opacity: 0;
+        animation: fadeIn 1s ease-in 0.3s forwards;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+
+    .hero-tagline {
+        font-size: 1.8rem;
+        font-style: italic;
+        margin-bottom: 3rem;
+        opacity: 0;
+        animation: fadeIn 1s ease-in 0.6s forwards;
+        letter-spacing: 1px;
+    }
+
+    .cta-button {
+        padding: 1.2rem 3rem;
+        background-color: var(--gold);
+        color: var(--white);
+        text-decoration: none;
+        border: none;
+        font-size: 1rem;
+        letter-spacing: 1.5px;
+        cursor: pointer;
+        transition: all 0.4s;
+        opacity: 0;
+        animation: fadeIn 1s ease-in 0.9s forwards;
+        display: inline-block;
+        text-transform: uppercase;
+    }
+
+    .cta-button:hover {
+        background-color: var(--blush);
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+
+    /* Section Styling */
+    section {
+        padding: 5rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        text-align: center;
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: var(--charcoal);
+    }
+
+    .section-subtitle {
+        text-align: center;
+        font-size: 1.2rem;
+        color: var(--dark-charcoal);
+        margin-bottom: 4rem;
+        font-style: italic;
+    }
+
+    /* Portfolio Preview */
+    .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .portfolio-item {
+        position: relative;
+        overflow: hidden;
+        aspect-ratio: 4/5;
+        background: linear-gradient(135deg, var(--light-gray) 0%, var(--blush) 100%);
+        cursor: pointer;
+        border-radius: 2px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.4s, box-shadow 0.4s;
+    }
+
+    .portfolio-item:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .portfolio-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, rgba(201, 168, 106, 0.3) 0%, rgba(212, 181, 168, 0.3) 100%);
+        opacity: 0.5;
+        transition: opacity 0.4s;
+    }
+
+    .portfolio-item:hover::before {
+        opacity: 0.8;
+    }
+
+    .portfolio-label {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 2rem;
+        background: linear-gradient(to top, rgba(74, 74, 74, 0.95), transparent);
+        color: var(--white);
+        transform: translateY(50%);
+        transition: transform 0.4s;
+    }
+
+    .portfolio-item:hover .portfolio-label {
+        transform: translateY(0);
+    }
+
+    .portfolio-label h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: var(--white);
+    }
+
+    /* About Section */
+    .about-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 5rem;
+        align-items: center;
+    }
+
+    .about-image {
+        width: 100%;
+        aspect-ratio: 3/4;
+        background: linear-gradient(135deg, var(--light-gray) 0%, var(--blush) 50%, var(--gold) 100%);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        border-radius: 2px;
+    }
+
+    .about-text h2 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+    }
+
+    .about-text p {
+        margin-bottom: 1.5rem;
+        line-height: 1.9;
+        font-size: 1.05rem;
+    }
+
+    .about-highlights {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-top: 3rem;
+    }
+
+    .highlight-item {
+        text-align: center;
+        padding: 1.5rem;
+        background-color: var(--white);
+        border-radius: 2px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    .highlight-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .highlight-item h4 {
+        margin-bottom: 0.5rem;
+        color: var(--gold);
+    }
+
+    /* Services */
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+    }
+
+    .service-card {
+        padding: 3rem 2.5rem;
+        background-color: var(--white);
+        text-align: center;
+        transition: transform 0.4s, box-shadow 0.4s;
+        border: 2px solid var(--light-gray);
+        border-radius: 2px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .service-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--gold), var(--blush));
+        transform: scaleX(0);
+        transition: transform 0.4s;
+    }
+
+    .service-card:hover::before {
+        transform: scaleX(1);
+    }
+
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        border-color: var(--gold);
+    }
+
+    .service-card h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+        color: var(--charcoal);
+    }
+
+    .service-price {
+        font-size: 2rem;
+        font-weight: 600;
+        margin: 1.5rem 0;
+        color: var(--gold);
+        font-family: Georgia, serif;
+    }
+
+    .service-features {
+        list-style: none;
+        margin: 2rem 0;
+        text-align: left;
+    }
+
+    .service-features li {
+        padding: 0.8rem 0;
+        border-bottom: 1px solid var(--light-gray);
+        position: relative;
+        padding-left: 1.5rem;
+    }
+
+    .service-features li::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: var(--gold);
+        font-weight: bold;
+    }
+
+    /* Testimonials */
+    .testimonial-carousel {
+        max-width: 900px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 4rem 3rem;
+        background-color: var(--white);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-radius: 2px;
+        position: relative;
+    }
+
+    .testimonial-stars {
+        color: var(--gold);
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .testimonial-text {
+        font-size: 1.3rem;
+        font-style: italic;
+        margin-bottom: 2rem;
+        color: var(--dark-charcoal);
+        line-height: 1.8;
+    }
+
+    .testimonial-author {
+        color: var(--charcoal);
+        font-weight: 600;
+        letter-spacing: 1px;
+        font-size: 1.1rem;
+    }
+
+    .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 2.5rem;
+    }
+
+    .dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background-color: var(--light-gray);
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .dot:hover {
+        background-color: var(--blush);
+    }
+
+    .dot.active {
+        background-color: var(--gold);
+        transform: scale(1.2);
+    }
+
+    /* Booking Section */
+    .booking-container {
+        max-width: 900px;
+        margin: 0 auto;
+        background-color: var(--white);
+        padding: 3rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        border-radius: 2px;
+    }
+
+    .booking-steps {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        margin-bottom: 3rem;
+    }
+
+    .booking-step {
+        text-align: center;
+        padding: 2rem 1rem;
+        background-color: var(--cream);
+        border-radius: 2px;
+    }
+
+    .step-number {
+        width: 50px;
+        height: 50px;
+        background-color: var(--gold);
+        color: var(--white);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0 auto 1rem;
+    }
+
+    /* Contact Form */
+    .contact-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 2rem;
+    }
+
+    .form-group label {
+        display: block;
+        margin-bottom: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: var(--charcoal);
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+        width: 100%;
+        padding: 1.2rem;
+        border: 2px solid var(--light-gray);
+        background-color: var(--white);
+        font-family: inherit;
+        font-size: 1rem;
+        border-radius: 2px;
+        transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--gold);
+    }
+
+    .form-group textarea {
+        height: 180px;
+        resize: vertical;
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+
+    /* Blog Grid */
+    .blog-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 3rem;
+    }
+
+    .blog-card {
+        background-color: var(--white);
+        border-radius: 2px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    }
+
+    .blog-image {
+        width: 100%;
+        height: 250px;
+        background: linear-gradient(135deg, var(--light-gray), var(--blush));
+    }
+
+    .blog-content {
+        padding: 2rem;
+    }
+
+    .blog-date {
+        color: var(--gold);
+        font-size: 0.9rem;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+    }
+
+    .blog-card h3 {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+    }
+
+    .blog-card p {
+        color: var(--dark-charcoal);
+        line-height: 1.7;
+        margin-bottom: 1.5rem;
+    }
+
+    .read-more {
+        color: var(--gold);
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s;
+    }
+
+    .read-more:hover {
+        color: var(--blush);
+    }
+
+    /* Footer */
+    footer {
+        background-color: var(--dark-charcoal);
+        color: var(--cream);
+        padding: 4rem 5% 2rem;
+    }
+
+    .footer-content {
+        max-width: 1400px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 3rem;
+        margin-bottom: 3rem;
+    }
+
+    .footer-section h3 {
+        color: var(--gold);
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+    }
+
+    .footer-logo-section {
+        text-align: center;
+    }
+
+    .footer-logo {
+        width: 100px;
+        height: 100px;
+        margin: 0 auto 1.5rem;
+        filter: brightness(0) invert(1);
+    }
+
+    .footer-links {
+        list-style: none;
+    }
+
+    .footer-links li {
+        margin-bottom: 0.8rem;
+    }
+
+    .footer-links a {
+        color: var(--cream);
+        text-decoration: none;
+        transition: color 0.3s;
+    }
+
+    .footer-links a:hover {
+        color: var(--gold);
+    }
+
+    .social-links {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+    }
+
+    .social-links a {
+        width: 45px;
+        height: 45px;
+        background-color: rgba(249, 247, 244, 0.1);
+        color: var(--cream);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        font-size: 1.3rem;
+        border-radius: 50%;
+        transition: all 0.3s;
+    }
+
+    .social-links a:hover {
+        background-color: var(--gold);
+        transform: translateY(-3px);
+    }
+
+    .newsletter-form {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .newsletter-form input {
+        flex: 1;
+        padding: 1rem;
+        border: none;
+        background-color: rgba(249, 247, 244, 0.1);
+        color: var(--cream);
+        border-radius: 2px;
+    }
+
+    .newsletter-form input::placeholder {
+        color: var(--light-gray);
+    }
+
+    .newsletter-form button {
+        padding: 1rem 2rem;
+        background-color: var(--gold);
+        color: var(--white);
+        border: none;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 2px;
+        font-weight: 600;
+    }
+
+    .newsletter-form button:hover {
+        background-color: var(--blush);
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(249, 247, 244, 0.1);
+        color: var(--light-gray);
+    }
+
+    /* Page Transitions */
+    .page {
+        display: none;
+        animation: pageIn 0.5s ease-in;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    @keyframes pageIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+        .about-content {
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .about-highlights {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .nav-links {
+            position: fixed;
+            top: 70px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 70px);
+            background-color: var(--cream);
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 3rem 0;
+            gap: 2rem;
+            transition: left 0.3s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-links.active {
+            left: 0;
+        }
+
+        .mobile-menu {
+            display: flex;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        .hero-tagline {
+            font-size: 1.3rem;
+        }
+
+        .hero-logo {
+            width: 100px;
+            height: 100px;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+        }
+
+        section {
+            padding: 3rem 5%;
+        }
+
+        .portfolio-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .booking-steps {
+            grid-template-columns: 1fr;
+        }
+
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .newsletter-form {
+            flex-direction: column;
+        }
+
+        .footer-content {
+            grid-template-columns: 1fr;
+            text-align: center;
+        }
+
+        .social-links {
+            justify-content: center;
+        }
+    }
+
+    /* Scroll to Top Button */
+    .scroll-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background-color: var(--gold);
+        color: var(--white);
+        border: none;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        z-index: 999;
+    }
+
+    .scroll-top.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .scroll-top:hover {
+        background-color: var(--blush);
+        transform: translateY(-5px);
+    }
+</style>
+```
+
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <a href="#" class="nav-brand" onclick="showPage('home')">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='90' fill='none' stroke='%236B6B6B' stroke-width='2'/><path d='M85,60 Q85,75 90,85 L95,95 Q95,105 95,115 M100,50 L100,120 M115,60 Q115,75 110,85 L105,95 Q105,105 105,115' fill='none' stroke='%236B6B6B' stroke-width='2'/><path d='M70,90 L95,95 L95,85 M130,90 L105,95 L105,85' fill='none' stroke='%236B6B6B' stroke-width='2'/><ellipse cx='100' cy='65' rx='15' ry='20' fill='none' stroke='%236B6B6B' stroke-width='2'/></svg>" alt="True Light Photography Logo" class="nav-logo-img">
+            <span class="nav-logo-text">TRUE LIGHT</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#" onclick="showPage('home')">Home</a></li>
+            <li><a href="#" onclick="showPage('about')">About</a></li>
+            <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+            <li><a href="#" onclick="showPage('services')">Services</a></li>
+            <li><a href="#" onclick="showPage('booking')">Book Session</a></li>
+            <li><a href="#" onclick="showPage('testimonials')">Testimonials</a></li>
+            <li><a href="#" onclick="showPage('blog')">Blog</a></li>
+            <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+        </ul>
+        <div class="mobile-menu" id="mobileMenu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+```
+<!-- HOME PAGE -->
+<div id="home" class="page active">
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='90' fill='none' stroke='white' stroke-width='2'/><path d='M85,60 Q85,75 90,85 L95,95 Q95,105 95,115 M100,50 L100,120 M115,60 Q115,75 110,85 L105,95 Q105,105 105,115' fill='none' stroke='white' stroke-width='2'/><path d='M70,90 L95,95 L95,85 M130,90 L105,95 L105,85' fill='none' stroke='white' stroke-width='2'/><ellipse cx='100' cy='65' rx='15' ry='20' fill='none' stroke='white' stroke-width='2'/></svg>" alt="True Light Photography" class="hero-logo">
+            <h1>TRUE LIGHT</h1>
+            <p class="hero-tagline">Capturing Light. Telling Stories.</p>
+            <a href="#" onclick="showPage('booking')" class="cta-button">Book Your Session</a>
+        </div>
+    </section>
+
+    <!-- Portfolio Preview -->
+    <section>
+        <h2 class="section-title">Featured Work</h2>
+        <p class="section-subtitle">Moments that matter, beautifully preserved</p>
+        <div class="portfolio-grid">
+            <div class="portfolio-item">
+                <div class="portfolio-label">
+                    <h3>Portraits</h3>
+                    <p>Authentic moments captured beautifully</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-label">
+                    <h3>Couples & Engagements</h3>
+                    <p>Love stories in their truest form</p>
+                </div>
+            </div>
+            <div class="portfolio-item">
+                <div class="portfolio-label">
+                    <h3>Family</h3>
+                    <p>Cherished memories that last forever</p>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="#" onclick="showPage('portfolio')" class="cta-button">View Full Portfolio</a>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section style="background-color: var(--white);">
+        <h2 class="section-title">What Clients Say</h2>
+        <div class="testimonial-carousel">
+            <div class="testimonial-stars">★★★★★</div>
+            <p class="testimonial-text">"Working with True Light Photography was an absolute dream. The photos captured our love story perfectly, and we couldn't be happier with the results!"</p>
+            <p class="testimonial-author">— SARAH & MICHAEL</p>
+            <div class="carousel-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- ABOUT PAGE -->
+<div id="about" class="page">
+    <section style="padding-top: 8rem;">
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <h2>Hi, I'm [Your Name]</h2>
+                <p>Photography isn't just what I do—it's how I see the world. Every session is a chance to tell a unique story, to capture the light in its most authentic form, and to create images that become treasured memories.</p>
+                <p>With over [X] years of experience, I specialize in creating comfortable, joyful experiences that result in stunning imagery. My approach combines luxury editing with genuine moments, ensuring every photo feels both timeless and true to you.</p>
+                <p>Whether it's an intimate engagement session, a family milestone, or professional branding photography, I'm here to help you shine in your true light.</p>
+                <a href="#" onclick="showPage('booking')" class="cta-button" style="margin-top: 1rem;">Let's Work Together</a>
+            </div>
+        </div>
+
+        <div class="about-highlights">
+            <div class="highlight-item">
+                <div class="highlight-icon">✨</div>
+                <h4>Storytelling Style</h4>
+                <p>Every image tells your unique story with authenticity and emotion</p>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-icon">🎨</div>
+                <h4>Luxury Editing</h4>
+                <p>Professional post-production that enhances natural beauty</p>
+            </div>
+            <div class="highlight-item">
+                <div class="highlight-icon">💫</div>
+                <h4>Comfortable Experience</h4>
+                <p>Relaxed sessions where you can be completely yourself</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- PORTFOLIO PAGE -->
+<div id="portfolio" class="page">
+    <section style="padding-top: 8rem;">
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-subtitle">Explore our work by category</p>
+        
+        <h3 style="font-size: 2rem; margin: 3rem 0 2rem; color: var(--gold);">Portraits</h3>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+        </div>
+
+        <h3 style="font-size: 2rem; margin: 3rem 0 2rem; color: var(--gold);">Couples & Engagements</h3>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+        </div>
+
+        <h3 style="font-size: 2rem; margin: 3rem 0 2rem; color: var(--gold);">Family</h3>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+        </div>
+
+        <h3 style="font-size: 2rem; margin: 3rem 0 2rem; color: var(--gold);">Branding & Events</h3>
+        <div class="portfolio-grid">
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+            <div class="portfolio-item"></div>
+        </div>
+    </section>
+</div>
+
+<!-- SERVICES PAGE -->
+<div id="services" class="page">
+    <section style="padding-top: 8rem;">
+        <h2 class="section-title">Services & Investment</h2>
+        <p class="section-subtitle">Choose the perfect package for your needs</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Mini Sessions</h3>
+                <p class="service-price">$250–$350</p>
+                <ul class="service-features">
+                    <li>30-minute session</li>
+                    <li>One location of your choice</li>
+                    <li>15-20 professionally edited images</li>
+                    <li>Digital gallery with download rights</li>
+                    <li>Perfect for quick updates & seasonal photos</li>
+                </ul>
+                <a href="#" onclick="showPage('booking')" class="cta-button" style="display: inline-block; margin-top: 1rem;">Book Now</a>
+            </div>
+            <div class="service-card">
+                <h3>Standard Portraits</h3>
+                <p class="service-price">$500–$700</p>
+                <ul class="service-features">
+                    <li>60-minute session</li>
+                    <li>Two locations</li>
+                    <li>40-50 edited images</li>
+                    <li>Digital gallery</li>
+                    <li>Print release included</li>
+                    <li>Wardrobe consultation</li>
+                </ul>
+                <a href="#" onclick="showPage('booking')" class="cta-button" style="display: inline-block; margin-top: 1rem;">Book Now</a>
+            </div>
+            <div class="service-card">
+                <h3>Premium Sessions</h3>
+                <p class="service-price">$900–$1,200</p>
+                <ul class="service-features">
+                    <li>90-minute session</li>
+                    <li>Multiple locations</li>
+                    <li>75+ edited images</li>
+                    <li>Premium luxury editing</li>
+                    <li>Print release + complimentary 8x10 print</li>
+                    <li>Styling guide & location scouting</li>
+                </ul>
+                <a href="#" onclick="showPage('booking')" class="cta-button" style="display: inline-block; margin-top: 1rem;">Book Now</a>
+            </div>
+            <div class="service-card">
+                <h3>Engagement & Branding</h3>
+                <p class="service-price">$1,200–$2,000+</p>
+                <ul class="service-features">
+                    <li>Custom session length (2-3 hours)</li>
+                    <li>Multiple locations</li>
+                    <li>100+ edited images</li>
+                    <li>Luxury editing & retouching</li>
+                    <li>Full print release</li>
+                    <li>Option for albums & wall art</li>
+                    <li>Short video reels available</li>
+                </ul>
+                <a href="#" onclick="showPage('booking')" class="cta-button" style="display: inline-block; margin-top: 1rem;">Book Now</a>
+            </div>
+        </div>
+
+        <div style="background-color: var(--white); padding: 3rem; margin-top: 4rem; text-align: center; border-radius: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+            <h3 style="font-size: 2rem; margin-bottom: 1.5rem;">Add-Ons & Upgrades</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; text-align: left;">
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Premium Prints</h4>
+                    <p>Starting at $35</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Custom Albums</h4>
+                    <p>$400–$800</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Wall Art & Canvas</h4>
+                    <p>Starting at $150</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--gold); margin-bottom: 0.5rem;">Video Reels</h4>
+                    <p>$200–$400</p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- BOOKING PAGE -->
+<div id="booking" class="page">
+    <section style="padding-top: 8rem;">
+        <h2 class="section-title">Book Your Session</h2>
+        <p class="section-subtitle">Let's create something beautiful together</p>
+        
+        <div class="booking-steps">
+            <div class="booking-step">
+                <div class="step-number">1</div>
+                <h4>Fill Out Form</h4>
+                <p>Tell us about your vision and preferred dates</p>
+            </div>
+            <div class="booking-step">
+                <div class="step-number">2</div>
+                <h4>Consultation Call</h4>
+                <p>We'll discuss details and finalize your session</p>
+            </div>
+            <div class="booking-step">
+                <div class="step-number">3</div>
+                <h4>Session Day</h4>
+                <p>Enjoy a relaxed, fun photography experience</p>
+            </div>
+        </div>
+
+        <div class="booking-container">
+            <form class="contact-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="fname">First Name *</label>
+                        <input type="text" id="fname" name="fname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name *</label>
+                        <input type="text" id="lname" name="lname" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="session-type">Session Type *</label>
+                    <select id="session-type" name="session-type" required>
+                        <option value="">Select a session type</option>
+                        <option value="mini">Mini Session ($250-$350)</option>
+                        <option value="standard">Standard Portrait ($500-$700)</option>
+                        <option value="premium">Premium Session ($900-$1,200)</option>
+                        <option value="engagement">Engagement/Branding ($1,200-$2,000+)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="date">Preferred Date</label>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="form-group">
+                    <label for="location">Preferred Location</label>
+                    <input type="text" id="location" name="location" placeholder="e.g., Downtown, beach, studio">
+                </div>
+                <div class="form-group">
+                    <label for="message">Tell us about your vision *</label>
+                    <textarea id="message" name="message" required placeholder="What's the occasion? Any specific ideas or styles you love?"></textarea>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="checkbox" required style="width: auto; margin-right: 0.5rem;">
+                        I agree to the terms and conditions *
+                    </label>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Submit Booking Request</button>
+            </form>
+            <div style="text-align: center; margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--light-gray);">
+                <p style="margin-bottom: 1rem;"><strong>Questions? Contact us directly:</strong></p>
+                <p><strong>Email:</strong> hello@truelightphotography.com</p>
+                <p><strong>Phone:</strong> (555) 123-4567</p>
+                <p style="margin-top: 1.5rem; color: var(--charcoal); font-size: 0.95rem;">
+                    <em>We typically respond within 24 hours. A 50% deposit is required to secure your date.</em>
+                </p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- TESTIMONIALS PAGE -->
+<div id="testimonials" class="page">
+    <section style="padding-top: 8rem;">
+        <h2 class="section-title">Client Love</h2>
+        <p class="section-subtitle">Hear from our wonderful clients</p>
+        
+        <div style="display: grid; gap: 3rem; max-width: 1000px; margin: 0 auto;">
+            <div class="testimonial-carousel">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Working with True Light Photography was an absolute dream. The photos captured our love story perfectly, and we couldn't be happier with the results!"</p>
+                <p class="testimonial-author">— SARAH & MICHAEL</p>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Professional, creative, and so easy to work with! Our family photos are stunning and we treasure every single one. The whole experience was wonderful from start to finish."</p>
+                <p class="testimonial-author">— THE JOHNSON FAMILY</p>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"The branding photos elevated my business presence completely. I receive compliments constantly and my bookings have increased significantly. Worth every penny!"</p>
+                <p class="testimonial-author">— EMILY, SMALL BUSINESS OWNER</p>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"I was nervous about being in front of the camera, but they made me feel so comfortable. The photos came out better than I ever imagined. Such a talented photographer!"</p>
+                <p class="testimonial-author">— JESSICA M.</p>
+            </div>
+
+            <div class="testimonial-carousel">
+                <div class="testimonial-stars">★★★★★</div>
+                <p class="testimonial-text">"Our engagement photos are absolutely breathtaking. True Light Photography captured the magic of our relationship in ways we didn't know was possible. Can't wait for our wedding photos!"</p>
+                <p class="testimonial-author">— DAVID & RACHEL</p>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- BLOG PAGE -->
+<div id="blog" class="page">
+    <section style="padding-top: 8rem;">
+        <h2 class="section-title">The Blog</h2>
+        <p class="section-subtitle">Tips, inspiration, and behind-the-scenes stories</p>
+        
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <p class="blog-date">SEPTEMBER 15, 2025</p>
+                    <h3>What to Wear for Your Portrait Session</h3>
+                    <p>Choosing the right outfit can make all the difference in your photos. Here are my top tips for selecting colors, styles, and accessories that photograph beautifully...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <p class="blog-date">AUGUST 28, 2025</p>
+                    <h3>5 Posing Tips for Natural-Looking Photos</h3>
+                    <p>Feeling awkward in front of the camera? You're not alone! These simple posing techniques will help you look and feel confident during your session...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <p class="blog-date">AUGUST 10, 2025</p>
+                    <h3>Behind the Scenes: A Day in the Life</h3>
+                    <p>Ever wonder what goes on behind the camera? Join me for a day of shooting, editing, and all the little moments that make this job so special...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <p class="blog-date">JULY 22, 2025</p>
+                    <h3>Best Locations for Outdoor Sessions</h3>
+                    <p>Discover my favorite outdoor spots for beautiful, natural light photography. From urban settings to scenic parks, these locations offer stunning backdrops...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <p class="blog-date">JULY 5, 2025</p>
+                    <h3>Preparing for Your Engagement Session</h3>
+                    <p>Your engagement session should be fun, romantic, and stress-free. Here's everything you need to know to prepare for the perfect couples shoot...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+
+            <div class="blog-card">
+                <div class="blog-image"></div>
+                <div class="blog-content">
+                    <p class="blog-date">JUNE 18, 2025</p>
+                    <h3>The Magic of Golden Hour Photography</h3>
+                    <p>There's something truly special about golden hour light. Learn why this time of day creates the most beautiful, flattering photos...</p>
+                    <a href="#" class="read-more">Read More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- CONTACT PAGE -->
+<div id="contact" class="page">
+    <section style="padding-top: 8rem;">
+        <h2 class="section-title">Get In Touch</h2>
+        <p class="section-subtitle">We'd love to hear from you</p>
+        
+        <div class="contact-container">
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="contact-name">Name *</label>
+                    <input type="text" id="contact-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-email">Email *</label>
+                    <input type="email" id="contact-email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="contact-phone">Phone</label>
+                    <input type="tel" id="contact-phone" name="phone">
+                </div>
+                <div class="form-group">
+                    <label for="contact-subject">Subject</label>
+                    <input type="text" id="contact-subject" name="subject" placeholder="e.g., General Inquiry, Pricing Question">
+                </div>
+                <div class="form-group">
+                    <label for="contact-message">Message *</label>
+                    <textarea id="contact-message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+                </div>
+                <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+            </form>
+            
+            <div style="margin-top: 4rem; padding: 3rem; background-color: var(--white); border-radius: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center;">
+                <h3 style="margin-bottom: 2rem; font-size: 1.8rem;">Contact Information</h3>
+                <p style="margin-bottom: 1.5rem;"><strong>Email:</strong> hello@truelightphotography.com</p>
+                <p style="margin-bottom: 1.5rem;"><strong>Phone:</strong> (555) 123-4567</p>
+                <p style="margin-bottom: 2rem;"><strong>Business Hours:</strong> Mon-Fri, 9:00 AM - 6:00 PM</p>
+                
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--light-gray);">
+                    <h4 style="margin-bottom: 1rem;">Follow Us</h4>
+                    <div class="social-links" style="justify-content: center;">
+                        <a href="https://instagram.com" aria-label="Instagram">📷</a>
+                        <a href="https://tiktok.com" aria-label="TikTok">🎵</a>
+                        <a href="https://pinterest.com" aria-label="Pinterest">📌</a>
+                        <a href="https://facebook.com" aria-label="Facebook">📘</a>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background-color: var(--cream); border-radius: 2px;">
+                    <p style="font-style: italic; color: var(--charcoal);">
+                        💡 <strong>Service Area:</strong> Based in [Your City] and surrounding areas. 
+                        Available for travel - inquire about destination sessions!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-logo-section">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='90' fill='none' stroke='white' stroke-width='2'/><path d='M85,60 Q85,75 90,85 L95,95 Q95,105 95,115 M100,50 L100,120 M115,60 Q115,75 110,85 L105,95 Q105,105 105,115' fill='none' stroke='white' stroke-width='2'/><path d='M70,90 L95,95 L95,85 M130,90 L105,95 L105,85' fill='none' stroke='white' stroke-width='2'/><ellipse cx='100' cy='65' rx='15' ry='20' fill='none' stroke='white' stroke-width='2'/></svg>" alt="True Light Photography" class="footer-logo">
+            <h3 style="color: var(--cream); font-size: 1.5rem; letter-spacing: 2px;">TRUE LIGHT</h3>
+            <p style="margin-top: 0.5rem;">Capturing Light. Telling Stories.</p>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="#" onclick="showPage('home')">Home</a></li>
+                <li><a href="#" onclick="showPage('about')">About</a></li>
+                <li><a href="#" onclick="showPage('portfolio')">Portfolio</a></li>
+                <li><a href="#" onclick="showPage('services')">Services</a></li>
+                <li><a href="#" onclick="showPage('booking')">Book Session</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Resources</h3>
+            <ul class="footer-links">
+                <li><a href="#" onclick="showPage('blog')">Blog</a></li>
+                <li><a href="#" onclick="showPage('testimonials')">Testimonials</a></li>
+                <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>Stay Connected</h3>
+            <div class="social-links">
+                <a href="https://instagram.com" aria-label="Instagram">📷</a>
+                <a href="https://tiktok.com" aria-label="TikTok">🎵</a>
+                <a href="https://pinterest.com" aria-label="Pinterest">📌</a>
+                <a href="https://facebook.com" aria-label="Facebook">📘</a>
+            </div>
+            <div style="margin-top: 2rem;">
+                <h4 style="margin-bottom: 1rem; font-size: 1.1rem;">Newsletter</h4>
+                <p style="margin-bottom: 1rem; font-size: 0.9rem;">Get seasonal offers & photography tips</p>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit">Join</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>&copy; 2025 True Light Photography. All rights reserved.</p>
+        <p style="margin-top: 0.5rem; font-size: 0.9rem;">Website design by True Light Photography</p>
+    </div>
+</footer>
+
+<!-- Scroll to Top Button -->
+<button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+<script>
+    // Page Navigation
+    function showPage(pageName) {
+        document.querySelectorAll('.page').forEach(page => {
+            page.classList.remove('active');
+        });
+        document.getElementById(pageName).classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // Close mobile menu if open
+        document.getElementById('navLinks').classList.remove('active');
+    }
+
+    // Mobile Menu Toggle
+    document.getElementById('mobileMenu').addEventListener('click', function() {
+        document.getElementById('navLinks').classList.toggle('active');
+    });
+
+    // Close mobile menu when clicking a link
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            document.getElementById('navLinks').classList.remove('active');
+        });
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 50) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Form submissions
+    document.querySelectorAll('form').forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            if (this.classList.contains('newsletter-form')) {
+                alert('Thank you for subscribing to our newsletter! Check your email for confirmation.');
+            } else if (this.classList.contains('contact-form')) {
+                alert('Thank you for your message! We will get back to you within 24 hours.');
+            }
+            this.reset();
+        });
+    });
+
+    // Testimonial carousel
+    const testimonials = [
+        {
+            text: "Working with True Light Photography was an absolute dream. The photos captured our love story perfectly, and we couldn't be happier with the results!",
+            author: "SARAH & MICHAEL"
+        },
+        {
+            text: "Professional, creative, and so easy to work with! Our family photos are stunning and we treasure every single one. The whole experience was wonderful from start to finish.",
+            author: "THE JOHNSON FAMILY"
+        },
+        {
+            text: "The branding photos elevated my business presence completely. I receive compliments constantly and my bookings have increased significantly. Worth every penny!",
+            author: "EMILY, SMALL BUSINESS OWNER"
+        }
+    ];
+
+    let currentTestimonial = 0;
+    const testimonialOnHomepage = document.querySelector('#home .testimonial-carousel');
+    
+    if (testimonialOnHomepage) {
+        const dots = testimonialOnHomepage.querySelectorAll('.dot');
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentTestimonial = index;
+                updateTestimonial();
+            });
+        });
+
+        function updateTestimonial() {
+            const textEl = testimonialOnHomepage.querySelector('.testimonial-text');
+            const authorEl = testimonialOnHomepage.querySelector('.testimonial-author');
+            
+            textEl.textContent = `"${testimonials[currentTestimonial].text}"`;
+            authorEl.textContent = `— ${testimonials[currentTestimonial].author}`;
+            
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentTestimonial);
+            });
+        }
+
+        // Auto-rotate testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            updateTestimonial();
+        }, 6000);
+    }
+
+    // Scroll to top button
+    const scrollTopBtn = document.getElementById('scrollTop');
+    
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            scrollTopBtn.classList.add('visible');
+        } else {
+            scrollTopBtn.classList.remove('visible');
+        }
+    });
+
+    scrollTopBtn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+            if (href !== '#' && !href.includes('onclick')) {
+                e.preventDefault();
+                const target = document.querySelector(href);
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+    });
+
+    // Intersection Observer for fade-in animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe portfolio items and service cards
+    document.querySelectorAll('.portfolio-item, .service-card, .blog-card').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+    });
+
+    // Initialize - show home page on load
+    window.addEventListener('load', function() {
+        showPage('home');
+    });
+</script>
+```
+
+</body>
+</html>
